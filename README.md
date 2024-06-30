@@ -1,4 +1,4 @@
-![Andes Finance Logo](public/images/final-logo.png) <!-- Asegúrate de que la extensión de la imagen sea correcta -->
+![Andes Finance Logo](final-logo.png) <!-- Asegúrate de que la extensión de la imagen sea correcta -->
 
 Bienvenido a **Andes Finance**, una plataforma que te permite:
 
