@@ -40,7 +40,7 @@ git clone https://github.com/tuusuario/tu-nuevo-repo.git
 cd tu-nuevo-repo
 ```
 
-### Instalación de Dependencias
+### Instalación de Dependencia
 
 Asegúrate de tener **Yarn** instalado. Luego, instala las dependencias:
 
