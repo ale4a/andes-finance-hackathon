@@ -1,93 +1,165 @@
-# Build Onchain Apps Template experiences
+![Andes Finance Logo](public/images/final-logo.png) <!-- Asegúrate de que la extensión de la imagen sea correcta -->
 
-## Getting Started
+Bienvenido a **Andes Finance**, una plataforma que te permite:
 
-#### Step 1: Setup Environment Variables
+- 🌍 Cambiar tus Bolivianos a USDT
+- 📈 Invertir en el mercado cripto
+- 💸 Pedir prestado dinero en USDT
 
-- Obtain a Base RPC URL from [Coinbase Developer Platform](https://www.coinbase.com/developer-platform/products/base-node?utm_source=boat) and assign to the `.env.local` file
+## Herramientas Utilizadas 🛠️
 
-```bash
-NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=ADD_WALLET_CONNECT_PROJECT_ID_HERE
-NEXT_PRIVATE_RPC_URL=ADD_RPC_URL_HERE
+- **Next.js**
+- **React**
+- **NextUI**
+- **Tailwind CSS**
+- **React Icons**
+- **i18next**
+- **next-i18next**
+- **Privy**
+- **Biconomy**
+- **ethers**
+- **Coinbase Wallet SDK**
+- **Jest**
+- **Testing Library**
+- **ESLint**
+- **Prettier**
+- **Stylelint**
+- **TypeScript**
+- **GraphQL**
+- **Framer Motion**
+- **React Query**
+
+## Cómo Clonar y Desplegar 🚀
+
+Sigue estos pasos para clonar y desplegar el proyecto.
+
+### Clonar el Repositorio
+
+```ssh
+git clone https://github.com/tuusuario/tu-nuevo-repo.git
+cd tu-nuevo-repo
 ```
 
-#### Step 2: Install and Run your onchain app
+### Instalación de Dependencias
 
-```bash
-# Install
-yarn
+Asegúrate de tener **Yarn** instalado. Luego, instala las dependencias:
 
-# Run
+```ssh
+yarn install
+```
+
+### Desarrollo Local
+
+Para iniciar el entorno de desarrollo local:
+
+```ssh
 yarn dev
 ```
 
-## Develop
+### Construcción para Producción
 
-To format and lint the package locally use these quick steps.
+Para construir el proyecto para producción:
 
-```bash
-# Format fix
-yarn format
-
-# Lint fix
-yarn lint
+```ssh
+yarn build
 ```
 
-## Updating ABI
+### Despliegue
 
-After you create a project using BOAT, these are the folders and files you are interested in when updating a smart contract:
-_Using BuyMeACoffee smart contract as an example below_
+Para iniciar el servidor en producción:
 
-```bash
-<project-name>
-├── contracts
-│   ├── src
-│   │   └── BuyMeACoffee.sol          ← smart contract code
-│   └──out/BuyMeACoffee.sol
-│       └── BuyMeACoffee.json         ← output from "forge build" which contains the updated ABI
-│
-└── web/app/buy-me-coffee
-    └── _contracts
-        ├── BuyMeACoffeeABI.ts             ← copy of ABI from contracts/out/BuyMeACoffee.json
-        └── useBuyMeACoffeeContract.ts     ← deploy address
+```ssh
+yarn start
 ```
 
-### Importing updated ABI to frontend code
+### Comprobaciones de Calidad
 
-After updating your smart contract code, run `forge build` in the `contracts` folder. This will create a json in the `contracts/out` directory.
+Para verificar y corregir el formato de código, linting y estilo:
 
-The output json contains additional information. We only need the `abi` property from that json object. Let's use `jq` to extract just the `abi` property
-
-```bash
-# from the "contract" folder
-
-jq .abi out/BuyMeACoffee/BuyMeACoffee.json
+```ssh
+yarn check
 ```
 
-Take the output of `jq` and update `web/app/buy-me-coffee/_contracts/BuyMeACoffeeABI.ts`
+Para ejecutar pruebas unitarias:
 
-Done with first step!
-
-### Deploying your smart contract and updating frontend code
-
-Make sure you got all the environment variables squared away in `contracts/.env` and get some base sepolia eth from a faucet!
-
-To deploy your smart contract,
-
-```bash
-# from the "contract" folder
-
-source .env && forge script script/LocalContract.s.sol:LocalContractScript  --broadcast --rpc-url https://sepolia.base.org
+```ssh
+yarn test
 ```
 
-In the long output, find the value for `Contract Address`.
+Para ejecutar pruebas unitarias con cobertura:
 
-Copy that value and update `web/app/buy-me-coffee/_contracts/useBuyMeACoffeeContract.ts` with the new address.
+```ssh
+yarn test:coverage
+```
 
-## Outro
+## Contracts
 
-This is one of the more error prone steps. Take it step by step.
+Este proyecto está construido usando Foundry. Para más información, visita la documentación [aquí](https://book.getfoundry.sh/).
 
-If you are new smart contract deployment, just try deploying the existing `BuyMeACoffee` contract and replace the contract address. After, try updating `BuyMeACoffee.sol` and get the new ABI in your frontend code.
+### Disclaimer
 
-We are thinking of ways to make this step easier in the future! Happy hacking!
+Los contratos Solidity proporcionados son solo para fines educativos y no están garantizados para ningún uso específico. No han sido auditados y pueden contener vulnerabilidades, por lo que no deben ser desplegados en entornos de producción. Úsalos bajo tu propio riesgo.
+
+### Contenido
+
+- **BuyMeACoffee**: Contrato para comprar un café al propietario con `0.001 ether` y enviar un memo.
+- **CustomERC1155**: Implementación de ejemplo de ERC1155 usando OpenZeppelin.
+- **AllowlistNFT**: Contrato para acuñar un ERC721A desde una lista de permitidos o una acuñación pública.
+
+### Contrato Desplegado
+
+Puedes ver el contrato desplegado en Sepolia [aquí](https://sepolia.basescan.org/address/0x346E69073BE72D03806504E9434c5e6811d33f43).
+
+### Layout del Proyecto
+
+### Uso
+
+#### Instalación
+
+```ssh
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+```
+
+#### Instalación de dependencias
+
+```ssh
+forge install
+```
+
+#### Construcción
+
+```ssh
+forge build
+```
+
+#### Pruebas
+
+```ssh
+forge test
+```
+
+#### Despliegue en Base Sepolia
+
+Configura tu archivo `.env` con tu clave privada y clave API de Base Sepolia, luego:
+
+```shh
+source .env
+forge script script/BuyMeACoffee.s.sol:BuyMeACoffeeScript --broadcast --verify --rpc-url base_sepolia
+```
+
+Para más detalles, consulta la documentación completa y los ejemplos en el proyecto.
+
+## Contribuir
+
+Si deseas contribuir, instala Foundry y las dependencias:
+
+```ssh
+
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+forge install
+forge build
+```
+
+¡Gracias por tu apoyo! ❤️
